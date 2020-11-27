@@ -190,7 +190,7 @@ const commonDependencies: any[] = [
   },
   {
     name: '@narik/ui-core',
-    version: '^5.0.0',
+    version: '^5.0.1',
   },
   {
     name: '@narik/jwt-authentication',
@@ -350,6 +350,7 @@ export function ngAdd(_options: AddSchema): Rule {
     updateTsConfig(ui),
     updateIndexhtml(ui, rtl),
     addLocalization(ui),
+   // addToMainTs(),
     // addModuleImports(ui, rtl),
     // addModuleProvids(ui),
     // updateAppModule(),
@@ -522,6 +523,21 @@ function addLocalization(ui: string) {
         localizeStr
       );
     }
+
+    return host;
+  };
+}
+
+function addToMainTs() {
+  return (host: Tree, context: SchematicContext) => {
+    const projectName: string = getWorkspace(host).defaultProject!;
+    prendendToTargetOptionFile(
+      host,
+      projectName,
+      '@angular-builders/custom-webpack:browser',
+      'main',
+      `import 'reflect-metadata';`
+    );
 
     return host;
   };
