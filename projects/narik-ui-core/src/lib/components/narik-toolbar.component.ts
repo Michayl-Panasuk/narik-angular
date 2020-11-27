@@ -116,7 +116,7 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
   constructor(injector: Injector, viewContainerRef: ViewContainerRef) {
     super(injector);
 
-    this.host = injector.get(HOST_TOKEN, undefined) as CommandHost;
+    this.host = injector.get(HOST_TOKEN, null) as CommandHost;
 
     if (!this.host && viewContainerRef) {
       this.host = getParentComponent<CommandHost>(viewContainerRef);

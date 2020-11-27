@@ -80,7 +80,7 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
       ] = this.dynamicFormService.getDynamicFormComponent(item);
     }
 
-    this.host = injector.get(HOST_TOKEN, undefined);
+    this.host = injector.get(HOST_TOKEN, null);
 
     if (!this.host && viewContainerRef) {
       this.host = getParentComponent<FormHost>(viewContainerRef);
