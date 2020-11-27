@@ -1,19 +1,19 @@
-import { NarikUiComponent } from "../base/narik-ui-component";
+import { NarikUiComponent } from '../base/narik-ui-component';
 import {
   ListRowCommand,
   NarikViewField,
   IPagingInfo,
-  NarikDataSource
-} from "@narik/infrastructure";
-import { Input, Output, EventEmitter } from "@angular/core";
-import { isArray } from "@narik/common";
+  NarikDataSource,
+} from '@narik/infrastructure';
+import { Input, Output, EventEmitter } from '@angular/core';
+import { isArray } from '@narik/common';
 export class NarikDataTable extends NarikUiComponent {
   get uiKey(): string {
-    return "data-table";
+    return 'data-table';
   }
 
   _fields: NarikViewField[];
-  _pagingInfo: IPagingInfo;
+  _pagingInfo: IPagingInfo | undefined;
   _dataSource: NarikDataSource<any>;
   _selectedItem: any;
   _selectedItems: any[];
@@ -60,18 +60,18 @@ export class NarikDataTable extends NarikUiComponent {
   }
 
   @Input()
-  set pagingInfo(value: IPagingInfo) {
+  set pagingInfo(value: IPagingInfo | undefined) {
     this._pagingInfo = value;
   }
-  get pagingInfo(): IPagingInfo {
+  get pagingInfo(): IPagingInfo | undefined {
     return this._pagingInfo;
   }
 
   @Input()
-  rowCommands?: ListRowCommand[];
+  rowCommands?: ListRowCommand[] | undefined;
 
   @Input()
-  rowCommandType?: "Menu" | "Flat" = "Flat";
+  rowCommandType?: 'Menu' | 'Flat' | undefined = 'Flat';
 
   @Output()
   rowCommandClick = new EventEmitter<{ key: string; item: any }>();
@@ -87,18 +87,18 @@ export class NarikDataTable extends NarikUiComponent {
 }
 
 export const NARIK_DATA_TABLE_INPUTS: string[] = [
-  "rowCommands",
-  "rowCommandType",
-  "fields",
-  "pagingInfo",
-  "dataSource",
-  "selectedItems",
-  "selectedItem"
+  'rowCommands',
+  'rowCommandType',
+  'fields',
+  'pagingInfo',
+  'dataSource',
+  'selectedItems',
+  'selectedItem',
 ];
 
 export const NARIK_DATA_TABLE_OUTPUTS: string[] = [
-  "rowCommandClick",
-  "selectedItemsChange",
-  "rowDoubleClick",
-  "selectedItemChange"
+  'rowCommandClick',
+  'selectedItemsChange',
+  'rowDoubleClick',
+  'selectedItemChange',
 ];
