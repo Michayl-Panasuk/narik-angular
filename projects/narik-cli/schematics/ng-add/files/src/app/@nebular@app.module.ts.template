@@ -36,6 +36,7 @@ import { MainViewComponent } from './main-view/main-view.component';
 <%= layoutModulePath %>
 import { ShareModule } from "./modules/share/share.module";
 import { NbDateFnsDateModule } from "@nebular/date-fns";
+import 'reflect-metadata';
 
 
 const moduleKey = "main";

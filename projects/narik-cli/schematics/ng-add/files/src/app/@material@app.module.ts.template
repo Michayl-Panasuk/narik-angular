@@ -36,6 +36,7 @@ import { MainComponent } from './main/main.component';
 import { MainViewComponent } from './main-view/main-view.component';
 <%= layoutModulePath %>
 import { ShareModule } from "./modules/share/share.module";
+import 'reflect-metadata';
 
 const moduleKey = "main";
 
