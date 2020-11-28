@@ -48,9 +48,9 @@ const layoutStyles: any = {
   coreui: ['node_modules/@coreui/icons/css/free.css'],
 };
 const commonStyles = [
-  'node_modules/@fortawesome/fontawesome-free/css/all.min.css',
-  'node_modules/ngx-toastr/toastr.css',
-  'src/styles/styles.scss',
+  '~@fortawesome/fontawesome-free/css/all.min.css',
+  '~ngx-toastr/toastr.css',
+  './styles/styles.scss',
 ];
 
 const uiStyles: any = {
@@ -350,7 +350,7 @@ export function ngAdd(_options: AddSchema): Rule {
     updateTsConfig(ui),
     updateIndexhtml(ui, rtl),
     addLocalization(ui),
-   // addToMainTs(),
+    // addToMainTs(),
     // addModuleImports(ui, rtl),
     // addModuleProvids(ui),
     // updateAppModule(),
@@ -1058,27 +1058,8 @@ export function addStyles(
   return function (host: Tree, context: SchematicContext): Tree {
     const workspace = getWorkspace(host);
     const project = workspace.projects[workspace.defaultProject!];
-    let assets: string[] = [];
-    if (!rtl || ui !== 'ng-bootstrap') {
-      assets.push('node_modules/bootstrap/dist/css/bootstrap.css');
-    } else {
-      assets.push('node_modules/bootstrap-v4-rtl/css/bootstrap.css');
-    }
-    assets = assets.concat(commonStyles);
+    const assets: string[] = ['src/styles.scss'];
 
-    if (uiStyles[ui]) {
-      assets = assets.concat(uiStyles[ui] as string[]);
-    }
-
-    if (layoutStyles[layout]) {
-      assets = assets.concat(layoutStyles[layout] as string[]);
-    }
-
-    if (rtl) {
-      if (rtlUiStyles[ui]) {
-        assets = assets.concat(rtlUiStyles[ui] as string[]);
-      }
-    }
     context.logger.log('info', `🔍 Adding styles...`);
     addStyleToTarget(project, 'build', host, assets, workspace);
     addStyleToTarget(project, 'test', host, assets, workspace);
@@ -1087,6 +1068,41 @@ export function addStyles(
   };
 }
 
+function createStyles(ui: string, rtl: boolean, layout: string): string[] {
+  let assets: string[] = [];
+  if (!rtl || ui !== 'ng-bootstrap') {
+    assets.push('~bootstrap/dist/css/bootstrap.css');
+  } else {
+    assets.push('~bootstrap-v4-rtl/css/bootstrap.css');
+  }
+  assets = assets.concat(commonStyles);
+
+  if (uiStyles[ui]) {
+    assets = assets.concat(
+      (uiStyles[ui] as string[]).map((x) => x.replace('node_modules/', '~'))
+    );
+  }
+
+  if (layoutStyles[layout]) {
+    assets = assets.concat(
+      (layoutStyles[layout] as string[]).map((x) =>
+        x.replace('node_modules/', '~')
+      )
+    );
+  }
+
+  if (rtl) {
+    if (rtlUiStyles[ui]) {
+      assets = assets.concat(
+        (rtlUiStyles[ui] as string[]).map((x) =>
+          x.replace('node_modules/', '~')
+        )
+      );
+    }
+  }
+
+  return assets;
+}
 function getLayoutModule(layout: string) {
   switch (layout) {
     case 'ngxadmin':
@@ -1118,6 +1134,7 @@ export function addExtraFiles(
     context.logger.log('info', `🔍 Adding  extra...`);
     const layoutModule = getLayoutModule(layout);
     const layoutModulePath = getLayoutModulePath(layout);
+    const styles = createStyles(ui, rtl, layout);
     const templateSource = apply(url('./files'), [
       applyTemplates({
         direction: rtl ? 'RTL' : 'LTR',
@@ -1125,6 +1142,7 @@ export function addExtraFiles(
         layoutStr: layout,
         layoutModule: layoutModule,
         layoutModulePath: layoutModulePath,
+        styles: styles,
       }),
       forEach((fileEntry: FileEntry) => {
         if (fileEntry.path.indexOf('@') >= 0) {
