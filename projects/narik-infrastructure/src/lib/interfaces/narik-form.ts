@@ -4,7 +4,7 @@ export interface Host {
   /**
    * An `Observable` that emit whenever state of host changes.
    */
-  readonly change: Observable<any>;
+  readonly change$: Observable<any>;
 }
 
 export function IsHost(obj: any): obj is Host {

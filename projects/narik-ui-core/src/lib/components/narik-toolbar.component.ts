@@ -8,6 +8,7 @@ import {
   ShortcutService,
   DialogService,
   HOST_TOKEN,
+  IsHost,
 } from '@narik/infrastructure';
 import { NarikInject } from '@narik/core';
 import { getParentComponent } from '@narik/common';
@@ -132,8 +133,8 @@ export class NarikToolBar extends NarikUiComponent implements OnInit {
         this.showLabel = info.showLabel;
       }
       this.items = info.items;
-      if (this.host && this.host.change) {
-        this.host.change.pipe(debounceTime(100)).subscribe((x) => {
+      if (IsHost(this.host)) {
+        this.host.change$.pipe(debounceTime(100)).subscribe((x) => {
           this.applyContextExpressions();
         });
       }

@@ -89,7 +89,7 @@ export class NarikDynamicForm extends NarikUiComponent implements OnInit {
 
   ngOnInit() {
     if (IsHost(this.host)) {
-      this.host.change.pipe(debounceTime(100)).subscribe(() => {
+      this.host.change$.pipe(debounceTime(100)).subscribe(() => {
         this.applyContextExpressions();
       });
     }
