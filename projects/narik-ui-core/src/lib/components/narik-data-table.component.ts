@@ -48,12 +48,15 @@ export class NarikDataTable extends NarikUiComponent {
 
   @Input()
   set fields(value: NarikViewField[]) {
-    if (value && isArray(value)) {
-      for (const field of value) {
-        field.options = field.options || {};
+    if (value !== this.fields) {
+      if (value && isArray(value)) {
+        for (const field of value) {
+          field.options = field.options || {};
+        }
       }
+      this._fields = value;
+      this.fieldsChanged();
     }
-    this._fields = value;
   }
   get fields(): NarikViewField[] {
     return this._fields;
@@ -61,7 +64,9 @@ export class NarikDataTable extends NarikUiComponent {
 
   @Input()
   set pagingInfo(value: IPagingInfo | undefined) {
-    this._pagingInfo = value;
+    if (value !== this.pagingInfo) {
+      this._pagingInfo = value;
+    }
   }
   get pagingInfo(): IPagingInfo | undefined {
     return this._pagingInfo;
@@ -84,6 +89,8 @@ export class NarikDataTable extends NarikUiComponent {
 
   @Output()
   selectedItemChange = new EventEmitter<any>();
+
+  protected fieldsChanged() {}
 }
 
 export const NARIK_DATA_TABLE_INPUTS: string[] = [
