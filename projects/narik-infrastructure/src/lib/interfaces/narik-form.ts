@@ -8,7 +8,7 @@ export interface Host {
 }
 
 export function IsHost(obj: any): obj is Host {
-  return obj && 'change' in obj && isObservable(obj.change);
+  return obj && 'change$' in obj && isObservable(obj.change$);
 }
 /**
  * Command host
