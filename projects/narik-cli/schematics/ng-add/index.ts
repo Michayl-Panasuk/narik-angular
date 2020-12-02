@@ -174,31 +174,31 @@ const commonDependencies: any[] = [
   },
   {
     name: '@narik/infrastructure',
-    version: '^5.0.0',
+    version: '^5.1.0',
   },
   {
     name: '@narik/common',
-    version: '^5.0.0',
+    version: '^5.1.0',
   },
   {
     name: '@narik/core',
-    version: '^5.0.0',
+    version: '^5.1.0',
   },
   {
     name: '@narik/app-core',
-    version: '^5.0.0',
+    version: '^5.1.0',
   },
   {
     name: '@narik/ui-core',
-    version: '^5.0.1',
+    version: '^5.1.1',
   },
   {
     name: '@narik/jwt-authentication',
-    version: '^5.0.0',
+    version: '^5.1.0',
   },
   {
     name: '@narik/client-storage',
-    version: '^5.0.0',
+    version: '^5.1.0',
   },
 ];
 
@@ -290,7 +290,7 @@ const uiDependency: any = {
   material: [
     {
       name: '@narik/ui-material',
-      version: '^5.0.0',
+      version: '^5.1.0',
     },
     {
       name: '@angular/material',
@@ -300,7 +300,7 @@ const uiDependency: any = {
   devextreme: [
     {
       name: '@narik/ui-devextreme',
-      version: '^5.0.0',
+      version: '^5.1.0',
     },
     {
       name: 'devextreme',
@@ -316,15 +316,15 @@ const uiDependency: any = {
     },
   ],
   'ng-bootstrap': [
-    { name: '@narik/ui-ng-bootstrap', version: '^5.0.0' },
-    { name: '@narik/ui-swimlane', version: '^5.0.0' },
+    { name: '@narik/ui-ng-bootstrap', version: '^5.1.0' },
+    { name: '@narik/ui-swimlane', version: '^5.1.0' },
     { name: '@swimlane/ngx-datatable', version: '^18.0.0' },
     { name: '@ng-bootstrap/ng-bootstrap', version: '^8.0.0' },
     { name: '@angular/localize', version: '^11.0.0' },
   ],
   nebular: [
-    { name: '@narik/ui-nebular', version: '^5.0.0' },
-    { name: '@narik/ui-swimlane', version: '^5.0.0' },
+    { name: '@narik/ui-nebular', version: '^5.1.0' },
+    { name: '@narik/ui-swimlane', version: '^5.1.0' },
     { name: '@swimlane/ngx-datatable', version: '^18.0.0' },
     { name: '@nebular/theme', version: '7.0.0-beta.1' },
     { name: '@nebular/date-fns', version: '7.0.0-beta.1' },
@@ -333,7 +333,7 @@ const uiDependency: any = {
   primeng: [
     { name: 'primeng', version: '^10.0.3' },
     { name: 'primeicons', version: '^4.0.0' },
-    { name: '@narik/ui-primeng', version: '^5.0.0' },
+    { name: '@narik/ui-primeng', version: '^5.1.0' },
   ],
 };
 
