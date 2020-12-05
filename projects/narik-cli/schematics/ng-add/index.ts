@@ -190,7 +190,7 @@ const commonDependencies: any[] = [
   },
   {
     name: '@narik/ui-core',
-    version: '^5.1.1',
+    version: '^5.1.0',
   },
   {
     name: '@narik/jwt-authentication',
